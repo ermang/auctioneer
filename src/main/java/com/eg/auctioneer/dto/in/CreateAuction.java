@@ -12,9 +12,10 @@ public class CreateAuction {
     public Long itemId;
     @NotNull(message = "startAmount can not be null")
     public BigDecimal startAmount;
-    @NotNull(message = "begin can not be null")
-    public LocalDateTime begin;
-    @NotNull(message = "end can not be null")
-    public LocalDateTime end;
+    @NotNull(message = "auctionBegin can not be null")
+    public LocalDateTime auctionBegin;
+    @NotNull(message = "auctionEnd can not be null")
+    public LocalDateTime auctionEnd;
 
+    public BigDecimal buyNowAmount;
 }

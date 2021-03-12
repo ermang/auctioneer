@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/item")
@@ -20,7 +21,7 @@ public class ItemController {
     }
 
     @PostMapping()
-    public void createUser(@RequestBody @Valid CreateItem createItem){
+    public void createItem(@RequestBody @Valid CreateItem createItem) throws IOException {
         itemCommandService.createItem(createItem);
     }
 }

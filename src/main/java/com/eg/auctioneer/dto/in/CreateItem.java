@@ -7,4 +7,6 @@ public class CreateItem {
     public String name;
     @NotBlank(message = "description can not be blank")
     public String description;
+
+    public String[] base64EncodedImages;
 }

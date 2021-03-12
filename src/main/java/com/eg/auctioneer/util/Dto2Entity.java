@@ -1,14 +1,8 @@
 package com.eg.auctioneer.util;
 
 
-import com.eg.auctioneer.dto.in.CreateAuction;
-import com.eg.auctioneer.dto.in.CreateBid;
-import com.eg.auctioneer.dto.in.CreateItem;
-import com.eg.auctioneer.dto.in.CreateUser;
-import com.eg.auctioneer.entity.AppUser;
-import com.eg.auctioneer.entity.Auction;
-import com.eg.auctioneer.entity.Bid;
-import com.eg.auctioneer.entity.Item;
+import com.eg.auctioneer.dto.in.*;
+import com.eg.auctioneer.entity.*;
 import com.eg.auctioneer.repo.AppUserRepo;
 import com.eg.auctioneer.repo.AuctionRepo;
 import com.eg.auctioneer.repo.ItemRepo;
@@ -51,10 +45,19 @@ public class Dto2Entity {
     public Auction createAuction2Auction(CreateAuction createAuction) {
         Auction a = new Auction();
         a.setName(createAuction.name);
-        a.setBegin(createAuction.begin);
-        a.setEnd(createAuction.end);
+        a.setBegin(createAuction.auctionBegin);
+        a.setEnd(createAuction.auctionEnd);
         a.setStartAmount(createAuction.startAmount);
         a.setItem(itemRepo.getOne(createAuction.itemId));
+        a.setCompleted(false);
+
+        if (createAuction.buyNowAmount == null) {
+            a.setBuyNowEnabled(false);
+            a.setBuyNowAmount(null);
+        } else {
+            a.setBuyNowEnabled(true);
+            a.setBuyNowAmount(createAuction.buyNowAmount);
+        }
 
         return a;
     }
@@ -68,15 +71,14 @@ public class Dto2Entity {
 
         return b;
     }
-//
-//    public Thread createThread2Thread(CreateThread createThread) {
-//        Thread t  = new Thread();
-//        t.setContent(createThread.content);
-//        t.setTopic(topicRepo.getOne(createThread.topicId));
-//        t.setCreatedOn(LocalDateTime.now());
-//        Long userId = activeUserResolver.getActiveUser().getUserId();
-//        t.setAppUser(appUserRepo.getOne(userId));
-//
-//        return t;
-//    }
+
+    public AuctionSubscription createAuctionSubscription2AuctionSubscription(CreateAuctionSubscription createAuctionSubscription) {
+        AuctionSubscription as = new AuctionSubscription();
+        as.setAuction(auctionRepo.getOne(createAuctionSubscription.auctionId));
+        as.setStatus(createAuctionSubscription.status);
+        Long userId = activeUserResolver.getActiveUser().getUserId();
+        as.setAppUser(appUserRepo.getOne(userId));
+
+        return as;
+    }
 }

@@ -20,6 +20,14 @@ public class Auction extends BaseEntity{
     private BigDecimal startAmount;
 
     @NotNull
+    private Boolean buyNowEnabled;
+
+    private BigDecimal buyNowAmount;
+
+    @NotNull
+    private Boolean completed;
+
+    @NotNull
     private LocalDateTime begin;
 
     @NotNull
@@ -47,6 +55,30 @@ public class Auction extends BaseEntity{
 
     public void setStartAmount(BigDecimal startAmount) {
         this.startAmount = startAmount;
+    }
+
+    public Boolean getBuyNowEnabled() {
+        return buyNowEnabled;
+    }
+
+    public void setBuyNowEnabled(Boolean buyNowEnabled) {
+        this.buyNowEnabled = buyNowEnabled;
+    }
+
+    public BigDecimal getBuyNowAmount() {
+        return buyNowAmount;
+    }
+
+    public void setBuyNowAmount(BigDecimal buyNowAmount) {
+        this.buyNowAmount = buyNowAmount;
+    }
+
+    public Boolean getCompleted() {
+        return completed;
+    }
+
+    public void setCompleted(Boolean completed) {
+        this.completed = completed;
     }
 
     public LocalDateTime getBegin() {
