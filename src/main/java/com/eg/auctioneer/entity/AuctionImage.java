@@ -5,19 +5,19 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class ItemImage extends BaseEntity {
+public class AuctionImage extends BaseEntity {
     @NotNull
     @ManyToOne
-    private Item item;
+    private Auction auction;
     @NotNull
     private String imagePath;
 
-    public Item getItem() {
-        return item;
+    public Auction getAuction() {
+        return auction;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setAuction(Auction auction) {
+        this.auction = auction;
     }
 
     public String getImagePath() {

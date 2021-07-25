@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class AuctionSubscription extends BaseEntity{
 
-    public enum Status {
+    public enum SubscriptionStatus {
         BIDDER,
         SPECTATOR
     }
@@ -22,8 +22,9 @@ public class AuctionSubscription extends BaseEntity{
     @ManyToOne
     private Auction auction;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private SubscriptionStatus status;
 
     public AppUser getAppUser() {
         return appUser;
@@ -41,11 +42,11 @@ public class AuctionSubscription extends BaseEntity{
         this.auction = auction;
     }
 
-    public Status getStatus() {
+    public SubscriptionStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(SubscriptionStatus status) {
         this.status = status;
     }
 }

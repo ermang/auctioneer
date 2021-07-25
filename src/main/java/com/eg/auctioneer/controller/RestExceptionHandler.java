@@ -53,28 +53,28 @@ public class RestExceptionHandler {//extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = { NoSuchElementException.class })
     protected ErrorResponse handleNoSuchElementException(NoSuchElementException ex, WebRequest request) {
         logger.error("hata", ex);
-        return new ErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND);
+        return new ErrorResponse(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = { IllegalArgumentException.class })
     protected ErrorResponse handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
 
-        return new ErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        return new ErrorResponse(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(value = { UnAuthorizedException.class })
     protected ErrorResponse handleUnAuthorizedException(UnAuthorizedException ex, WebRequest request) {
         logger.error("hata", ex);
-        return new ErrorResponse(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+        return new ErrorResponse(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = { RuntimeException.class })
     protected ErrorResponse handleRuntimeException(RuntimeException ex, WebRequest request) {
 
-        return new ErrorResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ErrorResponse(ex.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -85,6 +85,6 @@ public class RestExceptionHandler {//extends ResponseEntityExceptionHandler {
         for(ObjectError o : ex.getBindingResult().getAllErrors())
             validationErrors += o.getDefaultMessage();
 
-        return new ErrorResponse(validationErrors, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ErrorResponse(validationErrors);
     }
 }

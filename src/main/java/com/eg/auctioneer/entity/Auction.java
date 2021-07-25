@@ -1,6 +1,8 @@
 package com.eg.auctioneer.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -9,12 +11,21 @@ import java.time.LocalDateTime;
 @Entity
 public class Auction extends BaseEntity{
 
+    public enum AuctionStatus {
+        PENDING,
+        ACTIVE,
+        COMPLETED
+    }
+
     @NotNull
     private String name;
 
     @NotNull
+    private String description;
+
+    @NotNull
     @ManyToOne
-    private Item item;
+    private AppUser seller;
 
     @NotNull
     private BigDecimal startAmount;
@@ -25,13 +36,21 @@ public class Auction extends BaseEntity{
     private BigDecimal buyNowAmount;
 
     @NotNull
-    private Boolean completed;
+    @Enumerated(EnumType.STRING)
+    private AuctionStatus status;
 
     @NotNull
     private LocalDateTime begin;
 
     @NotNull
     private LocalDateTime end;
+
+    @ManyToOne
+    private AppUser winner;
+
+    private BigDecimal winAmount;
+
+    private Boolean winByBuyNow;
 
     public String getName() {
         return name;
@@ -41,12 +60,20 @@ public class Auction extends BaseEntity{
         this.name = name;
     }
 
-    public Item getItem() {
-        return item;
+    public String getDescription() {
+        return description;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public AppUser getSeller() {
+        return seller;
+    }
+
+    public void setSeller(AppUser seller) {
+        this.seller = seller;
     }
 
     public BigDecimal getStartAmount() {
@@ -73,12 +100,12 @@ public class Auction extends BaseEntity{
         this.buyNowAmount = buyNowAmount;
     }
 
-    public Boolean getCompleted() {
-        return completed;
+    public AuctionStatus getStatus() {
+        return status;
     }
 
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
+    public void setStatus(AuctionStatus status) {
+        this.status = status;
     }
 
     public LocalDateTime getBegin() {
@@ -95,5 +122,29 @@ public class Auction extends BaseEntity{
 
     public void setEnd(LocalDateTime end) {
         this.end = end;
+    }
+
+    public AppUser getWinner() {
+        return winner;
+    }
+
+    public void setWinner(AppUser winner) {
+        this.winner = winner;
+    }
+
+    public BigDecimal getWinAmount() {
+        return winAmount;
+    }
+
+    public void setWinAmount(BigDecimal winAmount) {
+        this.winAmount = winAmount;
+    }
+
+    public Boolean getWinByBuyNow() {
+        return winByBuyNow;
+    }
+
+    public void setWinByBuyNow(Boolean winByBuyNow) {
+        this.winByBuyNow = winByBuyNow;
     }
 }

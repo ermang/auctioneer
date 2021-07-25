@@ -8,14 +8,22 @@ import java.time.LocalDateTime;
 public class CreateAuction {
     @NotBlank(message = "name can not be blank")
     public String name;
-    @NotNull(message = "itemId can not be null")
-    public Long itemId;
+    @NotBlank(message = "description can not be blank")
+    public String description;
     @NotNull(message = "startAmount can not be null")
     public BigDecimal startAmount;
     @NotNull(message = "auctionBegin can not be null")
     public LocalDateTime auctionBegin;
     @NotNull(message = "auctionEnd can not be null")
     public LocalDateTime auctionEnd;
+    @NotNull(message = "buyNowEnabled can not be null")
+    public Boolean buyNowEnabled;
 
     public BigDecimal buyNowAmount;
 }
+
+
+
+
+
+
